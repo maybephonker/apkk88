@@ -39,7 +39,7 @@ async def spams(e):
         await e.delete()
         for i in range(count):
             await asyncio.sleep(0.2)  # add a 0.2 second delay between each message
-            if len(reply_msg.sticker.attributes) >= 2 and reply_msg.sticker.attributes[1].file_name.endswith('.tgs'):
+            if reply_msg.sticker.is_animated:
                 await e.respond(file=reply_msg.sticker, reply_to=reply_msg, supports_streaming=True)
             else:
                 await e.respond(file=reply_msg.sticker, reply_to=reply_msg)
