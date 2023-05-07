@@ -6,7 +6,7 @@ from userbot.events import register
 
 
 @register(outgoing=True, pattern="^.spamg(?: |$)(.*)")
-async def spamg(e):
+async def spam_gif(e):
     reply_msg = await e.get_reply_message()
     if reply_msg and reply_msg.gif:
         try:
@@ -24,8 +24,9 @@ async def spamg(e):
     else:
         await e.edit("Invalid command format, please reply to a gif to spam.")
 
+
 @register(outgoing=True, pattern=r"^.spams(?: |$)(.*)")
-async def spams(e):
+async def spam_sticker(e):
     reply_msg = await e.get_reply_message()
     if reply_msg and reply_msg.sticker:
         try:
@@ -42,10 +43,7 @@ async def spams(e):
             if reply_msg.sticker.attributes[1] == InputStickerSetID(id=0):
                 await e.respond(file=reply_msg.sticker, reply_to=reply_msg)
             else:
-                sticker = await reply_msg.download_media()
-                await e.client.send_file(e.chat_id, sticker, reply_to=reply_msg, supports_streaming=True)
-                await asyncio.sleep(0.2)  # add a 0.2 second delay between each message
-                await sticker.delete()
+                await e.respond(file=reply_msg.sticker, reply_to=reply_msg, supports_streaming=True)
     else:
         await e.edit("Invalid command format, please reply to a sticker to spam.")
 
