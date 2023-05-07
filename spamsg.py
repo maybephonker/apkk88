@@ -26,13 +26,10 @@ async def spamg(e):
 async def spams(e):
     reply_msg = await e.get_reply_message()
     if reply_msg and reply_msg.sticker:
-        sticker = reply_msg.sticker
-        if sticker.animated:
-            sticker_file = await e.client.download_media(sticker)
+        if reply_msg.sticker.is_animated:
+            file = reply_msg.sticker
         else:
-            sticker_file = BytesIO()
-            await e.client.download_media(sticker, sticker_file)
-            sticker_file.seek(0)
+            file = reply_msg.sticker.webp_file
         try:
             count = int(e.pattern_match.group(1).strip())
         except ValueError:
@@ -44,13 +41,10 @@ async def spams(e):
         await e.delete()
         for i in range(count):
             await asyncio.sleep(0.2)  # add a 0.2 second delay between each message
-            if sticker.animated:
-                await e.respond(file=sticker_file, force_document=False)
-            else:
-                await e.respond(file=sticker_file)
-                sticker_file.seek(0)
+            await e.respond(file=file)
     else:
         await e.edit("Invalid command format, please reply to a sticker to spam.")
+        
 
 CMD_HELP.update({
     "spams":
