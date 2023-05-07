@@ -73,13 +73,13 @@ async def spam(e):
 
 
 CMD_HELP.update({
-    "spams":
-    ".spams <number of messages>\
-    Usage: Spams the replied sticker a specified number of times."
+    "spamg":
+    ".spamg <number of messages>\
+    \nUsage: Spams the replied gif a specified number of times."
 })
 
 CMD_HELP.update({
-    "spamg":
-    ".spamg <number of messages>\
-    Usage: Spams the replied gif a specified number of times.
+    "spams":
+    ".spams <number of messages>\
+    \nUsage: Spams the replied sticker a specified number of times."
 })
