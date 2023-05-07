@@ -6,7 +6,7 @@ from userbot.events import register
 @register(outgoing=True, pattern="^.spamg(?: |$)(.*)")
 async def spamg(e):
     reply_msg = await e.get_reply_message()
-    if reply_msg and (reply_msg.media or reply_msg.gif or reply_msg.sticker):
+    if reply_msg and reply_msg.gif:
         try:
             count = int(e.pattern_match.group(1).strip())
         except ValueError:
