@@ -10,22 +10,21 @@ async def spamg(e):
         try:
             count = int(e.pattern_match.group(1).strip())
         except ValueError:
-            await e.edit("Invalid command format, please provide a number of messages to spam.")
+            await e.edit("Invalid command format, please provide a number of gifs to spam.")
             return
         if count <= 0:
-            await e.edit("Invalid command format, please provide a positive number of messages to spam.")
+            await e.edit("Invalid command format, please provide a positive number of gifs to spam.")
             return
         await e.delete()
-        media = reply_msg.media or reply_msg.gif or reply_msg.sticker
         for i in range(count):
             await asyncio.sleep(0.2)  # add a 0.2 second delay between each message
-            await e.respond(file=media)
+            await e.respond(file=reply_msg.gif)
     else:
-        await e.edit("Invalid command format, please reply to a sticker, gif, or photo to spam.")
+        await e.edit("Invalid command format, please reply to a gif to spam.")
 
 
 CMD_HELP.update({
     "spamg":
     ".spamg <number of messages>\
-    Usage: Spams the replied sticker, gif, or photo a specified number of times."
+    Usage: Spams the replied gif a specified number of times."
 })
