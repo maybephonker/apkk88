@@ -42,10 +42,13 @@ async def spams(e):
         await e.edit("Invalid command format, please reply to a sticker to spam.")
 
 CMD_HELP.update({
-    "spamg":
-    ".spamg <number of messages>\
-    Usage: Spams the replied gif a specified number of times.",
     "spams":
     ".spams <number of messages>\
     Usage: Spams the replied sticker a specified number of times."
+})
+
+CMD_HELP.update({
+    "spamg":
+    ".spamg <number of messages>\
+    Usage: Spams the replied gif a specified number of times."
 })
