@@ -16,9 +16,9 @@ async def spams(e):
             await e.edit("Invalid command format, please provide a positive number of messages to spam.")
             return
         await e.delete()
-        media = reply_msg.media or reply_msg.gif
+        media = reply_msg.media or reply_msg.gif or reply_msg.sticker
         for i in range(count):
-            await asyncio.sleep(0.2)  # add a 1 second delay between each message
+            await asyncio.sleep(0.2)  # add a 0.2 second delay between each message
             await e.respond(file=media)
     else:
         await e.edit("Invalid command format, please reply to a sticker or gif to spam.")
