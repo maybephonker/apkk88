@@ -6,7 +6,7 @@ from userbot.events import register
 
 
 @register(outgoing=True, pattern="^.spamg(?: |$)(.*)")
-async def spam_gif(e):
+async def spamg(e):
     reply_msg = await e.get_reply_message()
     if reply_msg and reply_msg.gif:
         try:
@@ -26,7 +26,7 @@ async def spam_gif(e):
 
 
 @register(outgoing=True, pattern=r"^.spams(?: |$)(.*)")
-async def spam_sticker(e):
+async def spams(e):
     reply_msg = await e.get_reply_message()
     if reply_msg and reply_msg.sticker:
         try:
@@ -37,13 +37,16 @@ async def spam_sticker(e):
         if count <= 0:
             await e.edit("Invalid command format, please provide a positive number of stickers to spam.")
             return
+        if reply_msg.sticker.attributes[1] and reply_msg.sticker.attributes[1].file_name.endswith('.tgs'):
+            await e.edit("Invalid command format, please reply to a non-animated sticker to spam.")
+            return
         await e.delete()
         for i in range(count):
             await asyncio.sleep(0.2)  # add a 0.2 second delay between each message
-            if reply_msg.sticker.attributes[1] == InputStickerSetID(id=0):
-                await e.respond(file=reply_msg.sticker, reply_to=reply_msg)
-            else:
+            if reply_msg.sticker.attributes[1]:
                 await e.respond(file=reply_msg.sticker, reply_to=reply_msg, supports_streaming=True)
+            else:
+                await e.respond(file=reply_msg.sticker, reply_to=reply_msg)
     else:
         await e.edit("Invalid command format, please reply to a sticker to spam.")
 
