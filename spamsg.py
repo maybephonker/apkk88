@@ -25,7 +25,7 @@ async def spamg(e):
 @register(outgoing=True, pattern="^.spams(?: |$)(.*)")
 async def spams(e):
     reply_msg = await e.get_reply_message()
-    if reply_msg and reply_msg.sticker:
+    if reply_msg and reply_msg.file.mime_type == "image/webp":
         try:
             count = int(e.pattern_match.group(1).strip())
         except ValueError:
@@ -37,7 +37,7 @@ async def spams(e):
         await e.delete()
         for i in range(count):
             await asyncio.sleep(0.2)  # add a 0.2 second delay between each message
-            await e.respond(reply_msg)
+            await e.respond(file=reply_msg.file)
     else:
         await e.edit("Invalid command format, please reply to a sticker to spam.")
 
