@@ -3,8 +3,8 @@ from userbot import CMD_HELP
 from userbot.events import register
 
 
-@register(outgoing=True, pattern="^.spams(?: |$)(.*)")
-async def spams(e):
+@register(outgoing=True, pattern="^.spamg(?: |$)(.*)")
+async def spamg(e):
     reply_msg = await e.get_reply_message()
     if reply_msg and (reply_msg.media or reply_msg.gif or reply_msg.sticker):
         try:
@@ -25,7 +25,7 @@ async def spams(e):
 
 
 CMD_HELP.update({
-    "spams":
-    ".spams <number of messages>\
+    "spamg":
+    ".spamg <number of messages>\
     Usage: Spams the replied sticker, gif, or photo a specified number of times."
 })
