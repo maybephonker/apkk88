@@ -4,7 +4,7 @@ from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.errors.rpcerrorlist import BadRequestError
 from telethon import events, functions, types
 from userbot import bot, CMD_HELP
-from userbot_events import register
+from userbot.events import register
 
 
 @register(outgoing=True, pattern=r"^.spams(?: |$)(.*)")
