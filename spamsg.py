@@ -37,7 +37,7 @@ async def spams(e):
         await e.delete()
         for i in range(count):
             await asyncio.sleep(0.2)  # add a 0.2 second delay between each message
-            await e.respond(file=reply_msg.sticker)
+            await e.respond(reply_msg)
     else:
         await e.edit("Invalid command format, please reply to a sticker to spam.")
 
