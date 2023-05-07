@@ -42,7 +42,10 @@ async def spams(e):
             if reply_msg.sticker.attributes[1] == InputStickerSetID(id=0):
                 await e.respond(file=reply_msg.sticker, reply_to=reply_msg)
             else:
-                await e.respond(file=reply_msg.sticker, reply_to=reply_msg, supports_streaming=True)
+                sticker = await reply_msg.download_media()
+                await e.client.send_file(e.chat_id, sticker, reply_to=reply_msg, supports_streaming=True)
+                await asyncio.sleep(0.2)  # add a 0.2 second delay between each message
+                await sticker.delete()
     else:
         await e.edit("Invalid command format, please reply to a sticker to spam.")
 
