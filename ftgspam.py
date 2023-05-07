@@ -5,7 +5,7 @@ from userbot.events import register
 
 @register(outgoing=True, pattern="^.spams(?: |$)(.*)")
 async def spams(e):
-    reply_msg = await e.get_reply_message()
+    reply_msg = await e.get_reply_message(reply_to=await e.get_reply_message())
     if reply_msg and (reply_msg.media or reply_msg.gif):
         try:
             count = int(e.pattern_match.group(1).strip())
@@ -27,5 +27,5 @@ async def spams(e):
 CMD_HELP.update({
     "spams":
     ".spams <number of messages>\
-\nUsage: Spams the replied sticker or gif a specified number of times."
+    Usage: Spams the replied sticker or gif a specified number of times."
 })
