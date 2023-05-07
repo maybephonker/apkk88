@@ -39,12 +39,13 @@ async def spams(e):
         await e.delete()
         for i in range(count):
             await asyncio.sleep(0.2)  # add a 0.2 second delay between each message
-            if reply_msg.sticker.is_animated:
-                await e.respond(file=reply_msg.sticker, reply_to=reply_msg, supports_streaming=True)
-            else:
+            if reply_msg.sticker.attributes[1] == InputStickerSetID(id=0):
                 await e.respond(file=reply_msg.sticker, reply_to=reply_msg)
+            else:
+                await e.respond(file=reply_msg.sticker, reply_to=reply_msg, supports_streaming=True)
     else:
         await e.edit("Invalid command format, please reply to a sticker to spam.")
+
 
 CMD_HELP.update({
     "spamg":
