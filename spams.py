@@ -22,6 +22,7 @@ async def spams(e):
     else:
         await e.edit("Invalid command format, please reply to a sticker to spam.")
 
+        
 CMD_HELP.update({
     "spams":
     ".spams <number of messages>\
